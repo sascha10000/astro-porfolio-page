@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+const projects = await getCollection('projects');
+---
+
+{
+    projects.map(project => (
+        <ProjectCard {...project.data} slug={project.slug}></ProjectCard>
+    ))
+}

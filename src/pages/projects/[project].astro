@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import marked from 'marked';
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+    return projects.map((p) => ({ params: { project: p.slug }, props: {...p} }));
+}
+
+const props = Astro.props;
+const body = marked.parse(props.body);
+---
+<ProjectLayout {...props}></ProjectLayout>
